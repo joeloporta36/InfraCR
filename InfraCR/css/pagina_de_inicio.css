@@ -1,0 +1,1112 @@
+/*
+╔══════════════════════════════════════════════════════════════════╗
+║                  InfraCR — Hoja de Estilos                       ║
+║  Archivo: styles.css                                             ║
+║  Descripción: Todos los estilos visuales de la landing page.     ║
+║  Para modificar colores, edita las variables en :root            ║
+╚══════════════════════════════════════════════════════════════════╝
+
+ÍNDICE DE SECCIONES:
+─────────────────────────────────────────
+1.  Variables y Reset
+2.  Tipografía base
+3.  Navbar
+4.  Menú móvil
+5.  Hero
+6.  Stats Strip
+7.  Categorías
+8.  Cómo Funciona
+9.  Banner CTA
+10. Chatbot FAB
+11. Footer
+12. Animaciones de scroll (.reveal)
+13. Media Queries (responsivo)
+─────────────────────────────────────────
+*/
+
+
+/* ══════════════════════════════════════════
+1. VARIABLES Y RESET
+══════════════════════════════════════════
+Las variables (--nombre) son el "panel de control"
+del diseño. Si quieres cambiar un color, radio o
+sombra en toda la página, solo edita aquí.
+*/
+
+/* Reset: elimina márgenes/paddings del navegador */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variables globales de diseño */
+:root {
+
+  /* ── Paleta de colores principal ── */
+  --green:          #2ecc40;   /* verde brillante — botones principales */
+  --green-mid:      #27ae36;   /* verde medio — hover de botones */
+  --green-dark:     #1a8a28;   /* verde oscuro — sombras y activos */
+  --green-pale:     rgba(46,204,64,.12); /* verde traslúcido — fondos suaves */
+  --accent:         #39ff6a;   /* verde neón — palabras resaltadas en hero */
+
+  /* ── Fondo oscuro con gradiente verde-azul (como la captura) ── */
+  --bg-page:        #070e12;   /* negro base de la página */
+  --bg-hero-from:   #0a2818;   /* verde muy oscuro (esquina superior izquierda) */
+  --bg-hero-mid:    #061a10;   /* verde profundo (centro) */
+  --bg-hero-to:     #050d1a;   /* azul muy oscuro (esquina inferior derecha) */
+
+  /* ── Superficie de tarjetas y componentes ── */
+  --surface:        rgba(255,255,255,.04);  /* blanco muy traslúcido */
+  --surface-hover:  rgba(255,255,255,.07);  /* un poco más visible en hover */
+  --border:         rgba(255,255,255,.08);  /* borde sutil sobre oscuro */
+  --border-green:   rgba(46,204,64,.25);    /* borde verde para badges/chips */
+
+  /* ── Colores de texto ── */
+  --text-white:     #ffffff;
+  --text-soft:      rgba(255,255,255,.65);  /* texto secundario/muted */
+  --text-muted:     rgba(255,255,255,.40);  /* texto terciario */
+
+  /* ── Sombras ── */
+  --shadow-sm:      0 2px 8px rgba(0,0,0,.25);
+  --shadow-md:      0 6px 24px rgba(0,0,0,.35);
+  --shadow-lg:      0 16px 48px rgba(0,0,0,.45);
+  --shadow-green:   0 6px 28px rgba(46,204,64,.35);
+
+  /* ── Radios de borde ── */
+  --r-sm:    8px;
+  --r-md:    14px;
+  --r-lg:    22px;
+  --r-pill:  100px;   /* completamente redondeado (pastilla) */
+
+  /* ── Fuente ── */
+  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Scroll suave al navegar con anclas (#seccion) */
+html { scroll-behavior: smooth; }
+
+
+/* ══════════════════════════════════════════
+   2. TIPOGRAFÍA BASE
+   ══════════════════════════════════════════
+   Define el estilo visual del cuerpo de la página.
+*/
+body {
+  font-family: var(--font);
+
+  /* Fondo oscuro con gradiente verde-azul igual a la captura */
+  background-color: var(--bg-page);
+  background-image: radial-gradient(
+    ellipse 90% 70% at 10% 0%,
+    var(--bg-hero-from) 0%,
+    var(--bg-hero-mid) 40%,
+    var(--bg-hero-to) 100%
+  );
+  /* El gradiente se fija, no se repite al hacer scroll */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  color: var(--text-white);
+
+  /* Suaviza las fuentes en pantallas de alta densidad */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  min-height: 100vh;
+}
+
+
+/* ══════════════════════════════════════════
+   3. NAVBAR — Barra de navegación
+   ══════════════════════════════════════════
+   Sticky: se queda fija al hacer scroll.
+   Glassmorphism: fondo semitransparente + blur.
+*/
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 500;           /* siempre encima de todo el contenido */
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(16px, 4vw, 48px); /* padding fluido: se achica en móvil */
+  gap: 6px;
+
+  /* Fondo glassmorphism */
+  background: rgba(7, 18, 14, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s ease;
+}
+
+/* Cuando el usuario hace scroll, el navbar se vuelve más sólido.
+   Esta clase la agrega main.js automáticamente. */
+.navbar.scrolled {
+  background: rgba(7, 18, 14, 0.98);
+}
+
+/* ── Logo / Marca ── */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;           /* no se achica en pantallas pequeñas */
+}
+
+/* Círculo del logo con borde verde */
+.nav-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  background: var(--green-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nav-logo svg { width: 18px; height: 18px; }
+
+/* Texto del nombre de la marca */
+.nav-brand-text {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: .2px;
+}
+
+/* Empuja los botones hacia la derecha */
+.nav-spacer { flex: 1; }
+
+/* Contenedor de los botones del nav */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Botón base del nav ── */
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  font-family: var(--font);
+  font-size: .83rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .18s, color .18s;
+}
+.nav-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+/* Variante: solo texto, sin fondo */
+.nav-ghost {
+  background: transparent;
+  color: var(--text-soft);
+}
+.nav-ghost:hover {
+  background: var(--surface-hover);
+  color: var(--text-white);
+}
+
+/* Variante: con borde sutil */
+.nav-outline {
+  background: transparent;
+  color: rgba(255,255,255,.85);
+  border: 1px solid var(--border);
+}
+.nav-outline:hover { background: var(--surface-hover); }
+
+/* Variante: verde sólido — acción principal del nav */
+.nav-solid {
+  background: var(--green);
+  color: #000;              /* texto negro sobre verde brillante = máximo contraste */
+  font-weight: 700;
+}
+.nav-solid:hover { background: var(--green-mid); }
+
+/* Línea separadora vertical entre grupos de botones */
+.nav-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  margin: 0 8px;
+}
+
+/* ── Botón Hamburguesa (solo visible en móvil) ── */
+.hamburger {
+  display: none;            /* oculto en desktop, JS + media query lo muestran */
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--r-sm);
+  margin-left: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,.8);
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s, width .3s;
+}
+
+/* Animación de X cuando el menú está abierto */
+.hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ══════════════════════════════════════════
+   4. MENÚ MÓVIL
+   ══════════════════════════════════════════
+   Panel desplegable que aparece en móvil
+   cuando se presiona el hamburguesa.
+   main.js le agrega la clase "is-open".
+*/
+.mobile-menu {
+  display: none;            /* oculto por defecto */
+  position: absolute;       /* se posiciona justo debajo del navbar */
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: rgba(7, 14, 10, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px clamp(16px, 4vw, 48px) 18px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 490;
+}
+
+/* Se muestra solo cuando main.js agrega esta clase */
+.mobile-menu.is-open { display: flex; }
+
+/* Links dentro del menú móvil */
+.mobile-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-soft);
+  text-decoration: none;
+  font-size: .9rem;
+  font-weight: 600;
+  padding: 12px 14px;
+  border-radius: var(--r-sm);
+  transition: background .15s, color .15s;
+}
+.mobile-menu a:hover {
+  background: var(--surface-hover);
+  color: var(--text-white);
+}
+.mobile-menu a svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+/* Línea separadora dentro del menú móvil */
+.mobile-menu-sep {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 0;
+}
+
+
+/* ══════════════════════════════════════════
+   5. HERO — Sección principal
+   ══════════════════════════════════════════
+   Ocupa todo el alto de la pantalla en desktop.
+   El fondo usa el gradiente del body.
+*/
+.hero {
+  min-height: 92vh;         /* casi toda la pantalla */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(60px, 10vw, 120px) clamp(20px, 5vw, 80px) clamp(40px, 6vw, 80px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Malla de puntos decorativos de fondo (grid pattern) */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Crea una cuadrícula sutil de puntos */
+  background-image:
+    radial-gradient(circle, rgba(46,204,64,.18) 1px, transparent 1px);
+  background-size: 38px 38px;
+  pointer-events: none;     /* no interfiere con clics */
+  opacity: .6;
+}
+
+/* Resplandor circular verde en la parte superior */
+.hero-glow {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(46,204,64,.18) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* Contenido del hero (siempre encima de los decorativos) */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+/* Badge/chip sobre el título */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(46,204,64,.10);
+  border: 1px solid var(--border-green);
+  color: rgba(255,255,255,.75);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .6px;
+  padding: 7px 18px;
+  border-radius: var(--r-pill);
+  margin-bottom: 28px;
+
+  /* Aparece desde abajo al cargar la página */
+  animation: fade-up .6s ease both;
+}
+
+/* Ícono pequeño dentro del badge */
+.hero-badge svg { width: 14px; height: 14px; }
+
+/* Título principal — muy grande e impactante */
+.hero h1 {
+  font-size: clamp(2.4rem, 7vw, 5rem);  /* fluido: pequeño en móvil, enorme en desktop */
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.06;
+  letter-spacing: -1.5px;
+  margin-bottom: 22px;
+  animation: fade-up .7s .1s ease both;
+}
+
+/* Línea en verde brillante (segunda línea del h1) */
+.hero h1 .highlight {
+  color: var(--accent);
+  display: block;           /* fuerza salto de línea */
+}
+
+/* Subtítulo del hero */
+.hero-sub {
+  font-size: clamp(.9rem, 2vw, 1.1rem);
+  color: var(--text-soft);
+  line-height: 1.65;
+  margin-bottom: 40px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fade-up .7s .2s ease both;
+}
+
+/* Grupo de botones CTA del hero */
+.hero-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fade-up .7s .3s ease both;
+}
+
+/* ── Botones ──
+   Se usan en el hero y en el banner CTA */
+
+/* Botón verde principal */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--green);
+  color: #000;              /* negro sobre verde = máximo contraste */
+  font-family: var(--font);
+  font-size: .92rem;
+  font-weight: 800;
+  padding: 15px 32px;
+  border-radius: var(--r-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: var(--shadow-green);
+}
+.btn-primary:hover {
+  background: var(--green-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(46,204,64,.45);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+/* Botón secundario (contorno oscuro con blur) */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.88);
+  font-family: var(--font);
+  font-size: .9rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255,255,255,.18);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+  backdrop-filter: blur(8px);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.35);
+}
+.btn-secondary svg { width: 16px; height: 16px; }
+
+/* Botón blanco (se usa en el banner CTA verde) */
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--text-white);
+  color: var(--green-dark);
+  font-family: var(--font);
+  font-size: .92rem;
+  font-weight: 800;
+  padding: 15px 34px;
+  border-radius: var(--r-pill);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: var(--shadow-md);
+}
+.btn-white:hover {
+  background: #e8f5e9;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.btn-white svg { width: 17px; height: 17px; }
+
+/* Animación de entrada desde abajo (usada en hero) */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ══════════════════════════════════════════
+   6. STATS STRIP — Franja de estadísticas
+   ══════════════════════════════════════════
+   Fila de 4 métricas que generan credibilidad.
+   Fondo oscuro con borde superior e inferior.
+*/
+.stats-strip {
+  background: rgba(255,255,255,.03);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Cada celda de estadística */
+.stat-cell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px clamp(18px, 3.5vw, 44px);
+  border-right: 1px solid var(--border);
+  transition: background .18s;
+}
+.stat-cell:last-child { border-right: none; }
+.stat-cell:hover { background: var(--green-pale); }
+
+/* Cuadrado del ícono */
+.stat-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-sm);
+  background: var(--green-pale);
+  border: 1px solid var(--border-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .18s;
+}
+.stat-cell:hover .stat-icon-box { background: rgba(46,204,64,.2); }
+.stat-icon-box svg {
+  width: 19px;
+  height: 19px;
+  stroke: var(--green);
+}
+
+.stat-info { display: flex; flex-direction: column; }
+
+/* Número grande */
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1;
+}
+
+/* Etiqueta debajo del número */
+.stat-label {
+  font-size: .71rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+
+/* ══════════════════════════════════════════
+   7. CATEGORÍAS — Tarjetas de reporte
+   ══════════════════════════════════════════
+   Grid de 4 columnas con tarjetas interactivas.
+   Al hacer hover: sube, brilla y gira el ícono.
+*/
+.categories {
+  padding: clamp(52px, 7vw, 90px) clamp(16px, 5vw, 72px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Encabezado genérico de sección */
+.section-head {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+/* Texto pequeño sobre el título principal */
+.eyebrow {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+  opacity: .85;
+}
+
+/* Título de sección */
+.section-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: -.5px;
+}
+
+/* Grid de tarjetas — 4 columnas en desktop */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Tarjeta individual */
+.cat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 32px 22px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform .22s, box-shadow .22s, border-color .22s, background .22s;
+}
+
+/* Resplandor verde en la parte superior de la tarjeta (invisible por defecto) */
+.cat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: var(--green);
+  opacity: 0;
+  transition: opacity .3s;
+  border-radius: 0 0 var(--r-pill) var(--r-pill);
+}
+
+.cat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 40px rgba(46,204,64,.12), var(--shadow-lg);
+  border-color: var(--border-green);
+  background: var(--surface-hover);
+}
+.cat-card:hover::before { opacity: 1; }  /* aparece la línea verde superior */
+
+/* Contenedor circular del emoji ícono */
+.cat-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--r-md);
+  background: var(--green-pale);
+  border: 1px solid var(--border-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  transition: background .22s, transform .22s, border-color .22s;
+  flex-shrink: 0;
+}
+/* En hover: fondo verde y rotación leve del ícono */
+.cat-card:hover .cat-icon {
+  background: rgba(46,204,64,.22);
+  transform: scale(1.1) rotate(-5deg);
+  border-color: rgba(46,204,64,.5);
+}
+
+/* Nombre de la categoría */
+.cat-name {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+/* Descripción de la categoría */
+.cat-desc {
+  font-size: .78rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Link "Reportar →" que aparece en hover */
+.cat-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .77rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-top: 4px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .22s, transform .22s;
+}
+.cat-link svg { width: 13px; height: 13px; }
+.cat-card:hover .cat-link { opacity: 1; transform: translateY(0); }
+
+
+/* ══════════════════════════════════════════
+   8. CÓMO FUNCIONA — Pasos del proceso
+   ══════════════════════════════════════════
+   Sección con fondo levemente diferente para
+   generar contraste visual con las categorías.
+   Contiene 3 pasos conectados por una línea.
+*/
+.how {
+  background: rgba(0,0,0,.25);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(56px, 8vw, 100px) clamp(16px, 5vw, 72px);
+}
+
+/* Contenedor centrado con ancho máximo */
+.how-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grid de 3 columnas para los pasos */
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 48px;
+  position: relative;
+}
+
+/* Línea horizontal que conecta los 3 pasos (solo desktop) */
+.how-grid::before {
+  content: '';
+  position: absolute;
+  top: 34px;                /* alineada con el centro de los círculos */
+  left: calc(16.66% + 8px);
+  right: calc(16.66% + 8px);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(46,204,64,.4),
+    rgba(57,255,106,.4)
+  );
+  z-index: 0;
+}
+
+/* Paso individual */
+.how-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Círculo del paso con el emoji */
+.step-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(46,204,64,.08);
+  border: 1.5px solid var(--border-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 22px;
+  position: relative;
+  transition: border-color .25s, background .25s, transform .25s;
+}
+.how-step:hover .step-circle {
+  border-color: var(--green);
+  background: rgba(46,204,64,.15);
+  transform: scale(1.07);
+}
+
+/* Número superpuesto en la esquina del círculo */
+.step-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #000;
+  font-size: .62rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Título del paso */
+.step-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 10px;
+}
+
+/* Descripción del paso */
+.step-desc {
+  font-size: .81rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+
+/* ══════════════════════════════════════════
+   9. BANNER CTA — Llamada a la acción final
+   ══════════════════════════════════════════
+   Sección verde degradada antes del footer.
+   Su propósito es convertir al visitante a registrarse.
+*/
+.cta-banner {
+  background: linear-gradient(
+    135deg,
+    var(--green-dark) 0%,
+    var(--green-mid) 60%,
+    #1db954 100%
+  );
+  padding: clamp(48px, 7vw, 80px) clamp(16px, 5vw, 72px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Círculos decorativos de fondo del banner */
+.cta-banner::before,
+.cta-banner::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  pointer-events: none;
+}
+.cta-banner::before {
+  width: 320px; height: 320px;
+  top: -100px; left: -80px;
+}
+.cta-banner::after {
+  width: 400px; height: 400px;
+  bottom: -120px; right: -80px;
+}
+
+/* Contenido centrado del banner */
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.cta-banner h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: -.4px;
+  margin-bottom: 14px;
+}
+
+.cta-banner p {
+  font-size: .96rem;
+  color: rgba(255,255,255,.78);
+  line-height: 1.65;
+  margin-bottom: 34px;
+}
+
+
+/* ══════════════════════════════════════════
+   10. CHATBOT FAB — Botón flotante de soporte
+   ══════════════════════════════════════════
+   Fijo en la esquina inferior derecha.
+   Pulsa suavemente para llamar la atención.
+*/
+.chatbot-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 400;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  border: 1px solid var(--border-green);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 24px rgba(46,204,64,.40);
+  transition: transform .2s, box-shadow .2s;
+
+  /* Pulso suave que empieza 2s después de cargar la página */
+  animation: fab-pulse 3s 2s infinite;
+}
+.chatbot-fab:hover {
+  transform: scale(1.12);
+  box-shadow: 0 8px 32px rgba(46,204,64,.55);
+  animation: none;          /* detiene el pulso durante el hover */
+}
+
+@keyframes fab-pulse {
+  0%, 88%, 100% { transform: scale(1); }
+  94%           { transform: scale(1.09); }
+}
+
+
+/* ══════════════════════════════════════════
+   11. FOOTER — Pie de página
+   ══════════════════════════════════════════
+   Fondo oscuro con links legales y contacto.
+*/
+footer {
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,.35);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 22px clamp(16px, 5vw, 72px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Texto de copyright */
+.footer-copy {
+  font-size: .77rem;
+  color: var(--text-muted);
+}
+
+/* Separador visual pequeño */
+.footer-pipe {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+}
+
+/* Links del footer */
+.footer-links { display: flex; gap: 16px; }
+.footer-links a {
+font-size: .77rem;
+color: rgba(255,255,255,.38);
+text-decoration: none;
+transition: color .18s;
+}
+.footer-links a:hover { color: rgba(255,255,255,.75); }
+
+/* Email de contacto */
+.footer-email {
+font-size: .77rem;
+color: var(--text-muted);
+}
+.footer-email a {
+color: rgba(255,255,255,.45);
+text-decoration: none;
+transition: color .18s;
+}
+.footer-email a:hover { color: var(--green); }
+
+
+/* ══════════════════════════════════════════
+12. ANIMACIONES DE SCROLL (.reveal)
+══════════════════════════════════════════
+Los elementos con clase "reveal" comienzan
+invisibles. main.js usa IntersectionObserver
+para agregar "visible" cuando entran en pantalla.
+*/
+.reveal {
+opacity: 0;
+transform: translateY(26px);
+transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* Retardos escalonados para animar los hijos en secuencia */
+.reveal-d1 { transition-delay: .10s; }
+.reveal-d2 { transition-delay: .20s; }
+.reveal-d3 { transition-delay: .30s; }
+.reveal-d4 { transition-delay: .40s; }
+
+
+/* ══════════════════════════════════════════
+13. MEDIA QUERIES — Diseño Responsivo
+══════════════════════════════════════════
+Breakpoints:
+· 960px → tablets grandes / landscape
+· 640px → móviles / tablets pequeñas
+· 420px → móviles muy pequeños
+*/
+
+/* ── Tablets (≤ 960px) ── */
+@media (max-width: 960px) {
+
+  /* Categorías: de 4 a 2 columnas */
+.cat-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Pasos "Cómo funciona": de columnas a fila (ícono + texto lado a lado) */
+.how-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+}
+  /* Oculta la línea conectora horizontal (no aplica en vertical) */
+.how-grid::before { display: none; }
+
+.how-step {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 22px;
+}
+.step-circle {
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+  /* Estadísticas: reduce el padding */
+.stat-cell { padding: 18px 20px; }
+}
+
+/* ── Móviles (≤ 640px) ── */
+@media (max-width: 640px) {
+
+  /* Oculta links del nav, muestra botón hamburguesa */
+.nav-ghost,
+.nav-sep { display: none; }
+.hamburger { display: flex; }
+
+  /* Hero: reduce la altura mínima */
+.hero { min-height: 88vh; }
+
+  /* Botones CTA en columna y ancho completo */
+.hero-cta {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.btn-primary,
+.btn-secondary { width: 100%; justify-content: center; }
+
+  /* Categorías: 2 columnas, oculta descripción para ahorrar espacio */
+.cat-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+.cat-desc { display: none; }
+
+  /* Estadísticas: grid 2×2 */
+.stats-strip { gap: 0; }
+.stat-cell {
+    flex: 1 1 50%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+}
+  /* Celdas impares: borde derecho para dividir las 2 columnas */
+.stat-cell:nth-child(odd) { border-right: 1px solid var(--border); }
+  /* Última fila: sin borde inferior */
+.stat-cell:nth-child(3),
+.stat-cell:nth-child(4) { border-bottom: none; }
+
+  /* Footer: apila verticalmente */
+.footer-inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Móviles muy pequeños (≤ 420px) ── */
+@media (max-width: 420px) {
+.cat-card { padding: 22px 14px 18px; }
+.cat-icon { width: 52px; height: 52px; font-size: 1.6rem; }
+
+  /* El título del hero puede necesitar menos letter-spacing */
+.hero h1 { letter-spacing: -.8px; }
+}
