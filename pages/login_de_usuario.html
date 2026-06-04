@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  InfraCR — Inicio de Sesión de Usuario                           ║
+  ║  Archivo: login-usuario.html                                     ║
+  ║  Descripción: Formulario de login para ciudadanos.               ║
+  ║               Incluye login con Google y Facebook,               ║
+  ║               recuperar contraseña y enlace a registro.          ║
+  ║                                                                  ║
+  ║  ARCHIVOS DE ESTA PANTALLA:                                      ║
+  ║  · login-usuario.html  → Esta página                             ║
+  ║  · login-usuario.css   → Sus estilos                             ║
+  ║                                                                  ║
+  ║  PARA CONECTAR EL FORMULARIO AL BACKEND:                         ║
+  ║  Busca el comentario "CONECTAR BACKEND" en el <form>             ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="InfraCR — Inicia sesión como ciudadano." />
+  <title>InfraCR — Iniciar Sesión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/login_de_usuario.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="../login_de_usuario.html" class="nav-brand">
+      <div class="nav-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2ecc40" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <span class="nav-brand-text">InfraCR</span>
+    </a>
+    <div class="nav-spacer"></div>
+    <div class="nav-actions">
+      <a href="#" class="nav-btn nav-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+        </svg>
+        Mapa
+      </a>
+      <div class="nav-sep"></div>
+      <a href="../login_de_usuario.html" class="nav-btn nav-outline active-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Iniciar Sesión
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger-btn" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../login_de_usuario.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+      </svg>
+      Inicio
+    </a>
+    <a href="../selecion_de_login.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Seleccionar rol
+    </a>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       CONTENIDO PRINCIPAL — Login de usuario
+  ════════════════════════════════════════ -->
+  <main class="main-wrapper">
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <div class="login-card">
+
+      <!-- Cabecera de la tarjeta -->
+      <div class="card-header">
+        <div class="card-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2ecc40" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Iniciar Sesión</h1>
+          <p class="card-subtitle">Bienvenido de vuelta, ciudadano</p>
+        </div>
+      </div>
+
+      <!-- Divisor -->
+      <div class="card-divider" aria-hidden="true"></div>
+
+      <!-- ── FORMULARIO ──
+           PARA CONECTAR BACKEND:
+           · action="/tu-endpoint-de-login"  → URL del servidor
+           · method="POST"                   → método HTTP
+           · Agrega un token CSRF si usas Laravel/Django/etc. -->
+      <form class="login-form" id="login-form" novalidate
+            action="#" method="POST">
+
+        <!-- Campo: Email -->
+        <div class="field-group">
+          <label for="email" class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Correo electrónico
+          </label>
+          <div class="input-wrapper">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="field-input"
+              placeholder="tu@correo.com"
+              autocomplete="email"
+              required
+              aria-describedby="email-error"
+            />
+          </div>
+          <!-- Mensaje de error — mostrado por JS cuando la validación falla -->
+          <span class="field-error" id="email-error" role="alert"></span>
+        </div>
+
+        <!-- Campo: Contraseña -->
+        <div class="field-group">
+          <label for="password" class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            Contraseña
+          </label>
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="field-input"
+              placeholder="Tu contraseña"
+              autocomplete="current-password"
+              required
+              aria-describedby="password-error"
+            />
+            <!-- Botón para mostrar/ocultar la contraseña -->
+            <button type="button" class="toggle-password" id="toggle-pw"
+                    aria-label="Mostrar u ocultar contraseña">
+              <!-- Ojo abierto (contraseña oculta) -->
+              <svg id="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <!-- Ojo cerrado (contraseña visible) — oculto por defecto -->
+              <svg id="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" style="display:none">
+                <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+          <span class="field-error" id="password-error" role="alert"></span>
+        </div>
+
+        <!-- Links: olvidé contraseña + registrarse -->
+        <div class="form-links">
+          <!-- PARA CONECTAR: cambia href a tu página de recuperación -->
+          <a href="#" class="form-link">¿Olvidó su contraseña?</a>
+          <!-- PARA CONECTAR: cambia href a tu página de registro -->
+          <a href="#" class="form-link form-link-green">Registrarse</a>
+        </div>
+
+        <!-- Divisor "o continúa con" -->
+        <div class="social-divider" aria-hidden="true">
+          <span class="social-line"></span>
+          <span class="social-label">o continúa con</span>
+          <span class="social-line"></span>
+        </div>
+
+        <!-- Botones de login social -->
+        <div class="social-btns">
+
+          <!-- PARA CONECTAR Google OAuth:
+               Reemplaza href con la URL de tu proveedor OAuth de Google -->
+          <a href="#" class="social-btn social-google" aria-label="Continuar con Google">
+            <!-- Logo de Google en SVG (sin imagen externa) -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            Google
+          </a>
+
+          <!-- PARA CONECTAR Facebook OAuth:
+               Reemplaza href con la URL de tu proveedor OAuth de Facebook -->
+          <a href="#" class="social-btn social-facebook" aria-label="Continuar con Facebook">
+            <svg viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+
+        <!-- Botón principal de submit -->
+        <button type="submit" class="btn-submit" id="btn-submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Iniciar Sesión
+        </button>
+
+        <!-- Mensaje de error general (mostrado por JS) -->
+        <div class="form-alert" id="form-alert" role="alert" aria-live="polite"></div>
+
+      </form>
+
+      <!-- Link para volver al selector de rol -->
+      <a href="../pages/selecion_de_login.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Volver a selección de rol
+      </a>
+
+    </div><!-- fin .login-card -->
+  </main>
+
+
+  <footer class="footer-min">
+    <span>© InfraNación 2026</span>
+    <div class="footer-pipe"></div>
+    <a href="#">Términos de uso</a>
+    <a href="#">Privacidad</a>
+    <div class="footer-pipe"></div>
+    <a href="mailto:soporte@infranacion.com">soporte@infranacion.com</a>
+  </footer>
+
+  <button class="chatbot-fab" aria-label="Soporte en línea">🤖</button>
+
+  <script>
+    /* ── Menú hamburguesa ── */
+    const btn  = document.getElementById('hamburger-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+
+    /* ── Mostrar / ocultar contraseña ──
+       Al hacer click en el ojo, alterna entre
+       type="password" y type="text" */
+    const togglePw  = document.getElementById('toggle-pw');
+    const pwInput   = document.getElementById('password');
+    const eyeOpen   = document.getElementById('eye-open');
+    const eyeClosed = document.getElementById('eye-closed');
+
+    togglePw.addEventListener('click', () => {
+      const visible = pwInput.type === 'text';
+      pwInput.type       = visible ? 'password' : 'text';
+      eyeOpen.style.display   = visible ? ''     : 'none';
+      eyeClosed.style.display = visible ? 'none' : '';
+    });
+
+    /* ── Validación del formulario ──
+       Se ejecuta antes de enviar al servidor.
+       NOTA: esto es validación del lado del cliente (UI).
+       Siempre valida también en el servidor (backend). */
+    const form      = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const emailErr  = document.getElementById('email-error');
+    const pwErr     = document.getElementById('password-error');
+    const formAlert = document.getElementById('form-alert');
+    const submitBtn = document.getElementById('btn-submit');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();  /* evita el envío mientras validamos */
+      let valid = true;
+
+      /* Limpiar errores anteriores */
+      emailErr.textContent  = '';
+      pwErr.textContent     = '';
+      formAlert.textContent = '';
+      emailInput.classList.remove('input-error');
+      pwInput.classList.remove('input-error');
+
+      /* Validar email */
+      const emailVal = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailVal) {
+        emailErr.textContent = 'El correo es obligatorio.';
+        emailInput.classList.add('input-error');
+        valid = false;
+      } else if (!emailRegex.test(emailVal)) {
+        emailErr.textContent = 'Ingresa un correo válido.';
+        emailInput.classList.add('input-error');
+        valid = false;
+      }
+
+      /* Validar contraseña */
+      if (!pwInput.value) {
+        pwErr.textContent = 'La contraseña es obligatoria.';
+        pwInput.classList.add('input-error');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      /* ── Simula envío (reemplaza con fetch/axios al backend) ──
+         Ejemplo real con fetch:
+
+         submitBtn.disabled = true;
+         submitBtn.textContent = 'Ingresando...';
+
+         fetch('/api/login', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ email: emailVal, password: pwInput.value })
+         })
+         .then(res => res.json())
+         .then(data => {
+           if (data.success) window.location.href = '/dashboard';
+           else formAlert.textContent = data.message || 'Credenciales incorrectas.';
+         })
+         .catch(() => formAlert.textContent = 'Error de conexión. Intenta de nuevo.')
+         .finally(() => { submitBtn.disabled = false; submitBtn.textContent = 'Iniciar Sesión'; });
+      */
+
+      /* Simulación temporal */
+      submitBtn.textContent = 'Ingresando...';
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        submitBtn.textContent = 'Iniciar Sesión';
+        submitBtn.disabled = false;
+        formAlert.textContent = 'Conecta el formulario al backend para completar el login.';
+        formAlert.style.color = '#a8f0b0';
+      }, 1200);
+    });
+  </script>
+
+</body>
+</html>

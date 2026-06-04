@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  InfraCR — Inicio de Sesión Administrador                        ║
+  ║  Archivo: login-admin.html                                       ║
+  ║  Descripción: Formulario de acceso exclusivo para personal       ║
+  ║               autorizado de municipalidades.                     ║
+  ║               Solo acepta correos institucionales.               ║
+  ║               NO tiene login social (Google/Facebook).           ║
+  ║                                                                  ║
+  ║  ARCHIVOS DE ESTA PANTALLA:                                      ║
+  ║  · login-admin.html  → Esta página                               ║
+  ║  · login-admin.css   → Sus estilos                               ║
+  ║                                                                  ║
+  ║  DIFERENCIAS VS login-usuario.html:                              ║
+  ║  · Sin botones de Google/Facebook                                ║
+  ║  · Tema azul en lugar de verde                                   ║
+  ║  · Mensaje "Solo personal autorizado"                            ║
+  ║  · Placeholder de email institucional                            ║
+  ║  · Badge de seguridad visible                                    ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="InfraCR — Acceso exclusivo para administradores municipales." />
+  <title>InfraCR — Acceso Administrativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/login_de_admin.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="../selecion_de_login.html" class="nav-brand">
+      <div class="nav-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2ecc40" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <span class="nav-brand-text">InfraCR</span>
+    </a>
+    <div class="nav-spacer"></div>
+    <div class="nav-actions">
+      <a href="#" class="nav-btn nav-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+        </svg>
+        Mapa
+      </a>
+      <div class="nav-sep"></div>
+      <a href="../selecion_de_login.html" class="nav-btn nav-outline active-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Iniciar Sesión
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger-btn" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../login_de_admin.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+      </svg>
+      Inicio
+    </a>
+    <a href="../login_de_admin.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Seleccionar rol
+    </a>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       CONTENIDO PRINCIPAL — Login Admin
+       ════════════════════════════════════════
+       Diseño en azul para diferenciarlo visualmente
+       del login de usuario (verde). Esto ayuda al
+       administrador a saber claramente que está en
+       el área restringida.
+  ════════════════════════════════════════ -->
+  <main class="main-wrapper">
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <div class="login-card">
+
+      <!-- Badge de acceso restringido -->
+      <div class="restricted-badge" role="note" aria-label="Área de acceso restringido">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0110 0v4"/>
+        </svg>
+        Solo personal autorizado
+      </div>
+
+      <!-- Cabecera de la tarjeta -->
+      <div class="card-header">
+        <div class="card-avatar" aria-hidden="true">
+          <!-- Ícono de engranaje/admin — diferente al del usuario -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5ba3e8" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Acceso Administrativo</h1>
+          <p class="card-subtitle">Municipalidades — Panel de gestión InfraCR</p>
+        </div>
+      </div>
+
+      <!-- Divisor -->
+      <div class="card-divider"></div>
+
+      <!-- ── FORMULARIO ──
+           DIFERENCIAS VS login-usuario:
+           · Email debe ser institucional (validado con regex más estricto)
+           · No hay botones de OAuth (Google/Facebook)
+           · El botón submit es azul en lugar de verde
+
+           PARA CONECTAR BACKEND:
+           · action="/api/admin/login"
+           · Considera usar 2FA (doble factor) para administradores -->
+      <form class="login-form" id="login-form" novalidate
+            action="#" method="POST">
+
+        <!-- Campo: Email institucional -->
+        <div class="field-group">
+          <label for="email" class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Correo institucional
+          </label>
+          <div class="input-wrapper">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="field-input"
+              placeholder="admin@municipalidad.go.cr"
+              autocomplete="email"
+              required
+              aria-describedby="email-error"
+            />
+          </div>
+          <span class="field-error" id="email-error" role="alert"></span>
+        </div>
+
+        <!-- Campo: Contraseña -->
+        <div class="field-group">
+          <label for="password" class="field-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            Contraseña
+          </label>
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="field-input"
+              placeholder="Contraseña de administrador"
+              autocomplete="current-password"
+              required
+              aria-describedby="password-error"
+            />
+            <!-- Botón de mostrar/ocultar contraseña -->
+            <button type="button" class="toggle-password" id="toggle-pw"
+                    aria-label="Mostrar u ocultar contraseña">
+              <svg id="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg id="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" style="display:none">
+                <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+          <span class="field-error" id="password-error" role="alert"></span>
+        </div>
+
+        <!-- Links: olvidé contraseña -->
+        <div class="form-links">
+          <a href="#" class="form-link">¿Olvidó su contraseña?</a>
+          <!-- No hay "Registrarse" para admins — el registro es por invitación -->
+          <span class="form-note">Acceso por invitación</span>
+        </div>
+
+        <!-- Botón submit — azul para diferenciar del admin -->
+        <button type="submit" class="btn-submit" id="btn-submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" aria-hidden="true">
+            <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Iniciar Sesión
+        </button>
+
+        <!-- Alerta general (errores del servidor) -->
+        <div class="form-alert" id="form-alert" role="alert" aria-live="polite"></div>
+
+      </form>
+
+      <!-- Nota de seguridad debajo del formulario -->
+      <div class="security-note" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>Este acceso es monitoreado. Solo para funcionarios municipales autorizados.</span>
+      </div>
+
+      <!-- Link para volver al selector -->
+      <a href="../pages/selecion_de_login.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Volver a selección de rol
+      </a>
+
+    </div><!-- fin .login-card -->
+  </main>
+
+
+  <footer class="footer-min">
+    <span>© InfraNación 2026</span>
+    <div class="footer-pipe"></div>
+    <a href="#">Términos de uso</a>
+    <a href="#">Privacidad</a>
+    <div class="footer-pipe"></div>
+    <a href="mailto:soporte@infranacion.com">soporte@infranacion.com</a>
+  </footer>
+
+  <button class="chatbot-fab" aria-label="Soporte en línea">🤖</button>
+
+  <script>
+    /* ── Menú hamburguesa ── */
+    const btn  = document.getElementById('hamburger-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+
+    /* ── Mostrar / ocultar contraseña ── */
+    const togglePw  = document.getElementById('toggle-pw');
+    const pwInput   = document.getElementById('password');
+    const eyeOpen   = document.getElementById('eye-open');
+    const eyeClosed = document.getElementById('eye-closed');
+    togglePw.addEventListener('click', () => {
+      const visible = pwInput.type === 'text';
+      pwInput.type = visible ? 'password' : 'text';
+      eyeOpen.style.display   = visible ? ''     : 'none';
+      eyeClosed.style.display = visible ? 'none' : '';
+    });
+
+    /* ── Validación del formulario ──
+       Para admins validamos que el correo tenga
+       el formato de correo institucional (.go.cr o
+       dominio de municipalidad). Ajusta el regex
+       según los dominios reales de tu sistema. */
+    const form       = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const emailErr   = document.getElementById('email-error');
+    const pwErr      = document.getElementById('password-error');
+    const formAlert  = document.getElementById('form-alert');
+    const submitBtn  = document.getElementById('btn-submit');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      /* Limpiar errores */
+      emailErr.textContent  = '';
+      pwErr.textContent     = '';
+      formAlert.textContent = '';
+      emailInput.classList.remove('input-error');
+      pwInput.classList.remove('input-error');
+
+      /* Validar email */
+      const emailVal   = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailVal) {
+        emailErr.textContent = 'El correo institucional es obligatorio.';
+        emailInput.classList.add('input-error');
+        valid = false;
+      } else if (!emailRegex.test(emailVal)) {
+        emailErr.textContent = 'Ingresa un correo institucional válido.';
+        emailInput.classList.add('input-error');
+        valid = false;
+      }
+
+      /* Validar contraseña */
+      if (!pwInput.value) {
+        pwErr.textContent = 'La contraseña es obligatoria.';
+        pwInput.classList.add('input-error');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      /* ── Conectar al backend ──
+         Para admins se recomienda usar un endpoint separado
+         del de usuarios, con logs de acceso y opcionalmente 2FA.
+
+         fetch('/api/admin/login', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ email: emailVal, password: pwInput.value })
+         })
+         .then(res => res.json())
+         .then(data => {
+           if (data.success) window.location.href = '/admin/dashboard';
+           else formAlert.textContent = data.message || 'Credenciales incorrectas.';
+         });
+      */
+
+      /* Simulación temporal */
+      submitBtn.textContent = 'Verificando...';
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        submitBtn.textContent = 'Iniciar Sesión';
+        submitBtn.disabled = false;
+        formAlert.textContent = 'Conecta al backend para completar el acceso administrativo.';
+        formAlert.style.color = '#a0c8f0';
+      }, 1400);
+    });
+  </script>
+
+</body>
+</html>

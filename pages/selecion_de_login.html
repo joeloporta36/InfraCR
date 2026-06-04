@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="InfraCR - Selecciona cómo deseas ingresar a la plataforma." />
+        <title>InfraCR - Ingresar</title>
+
+        <!-- Fuente: Plus Jakarta Snas -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+        <!-- Estilos específicos de esta pantalla -->
+        <link rel="stylesheet" href="../css/seleccion_de_login.css" />
+    </head>
+    <body>
+        <nav class="navbar">
+            <a href="../login_de_usuario.html" class="nav-brand" aria-label="Volver al inicio">
+                <div class="nav-logo" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2ecc40" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                </div>
+                <span class="nav-brand-text">InfraCR</span>
+            </a>
+
+            <div class="nav-spacer"></div>
+
+            <div class="nav-actions">
+                <a href="#" class="nav-btn nav-ghost">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    Mapa
+                </a>
+                <div class="nav-sep"></div>
+                <a href="#" class="nav-btn nav-outline active-nav">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Iniciar Sesión
+                </a>
+            </div>
+
+            <!-- Hamburguesa para móvil -->
+            <button class="hamburger" id="hamburger-btn" arial-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+
+        <!-- Menú móvil -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="../">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path id="M3 919-7 9 7v11a2 2 0 01-2 2H5a2 2 2 0 01-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                Inicio
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                </svg>
+                Mapa
+            </a>
+        </div>
+        <!-- ════════════════════════════════════════
+        CONTENIDO PRINCIPAL — Selector de rol
+        ════════════════════════════════════════
+        El usuario elige entre ingresar como
+        ciudadano o como administrador municipal.
+        ════════════════════════════════════════ -->
+        <main class="main-wrapper" role="main">
+
+            <!-- Resplandor decorativo de fondo -->
+            <div class="bg-glow" aria-hidden="true"></div>
+
+            <!-- Tarjeta / modal de selección -->
+            <div class="selector-card" role="dialog" aria-labelledby="selector-titulo">
+
+                <!-- Ícono superior -->
+                <div class="card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2ecc40" stroke-width="2" strokke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14" /> 
+                    </svg>
+                </div>
+
+                <!-- Título -->
+                <h1 id="selector-titulo">¿Cómo deseas ingresar?</h1>
+                <p class="card-sbtitle">Selecciona el tipo de cuenta con el que deseas acceder a InfraCR.</p>
+
+                <!-- Opciones de rol -->
+                <div class="role-options">
+
+
+                    <!-- Opción: Usuario ciudadano -->
+                    <!-- PARA CONECTAR: cambia href a tu ruta real de login de usuario -->
+                    <a href="../pages/login_de_usuario.html" class="role-btn role-user" aria-label="Ingresar como ciudadano">
+                        <div class="role-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-inecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                <circle x="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="role-text">
+                            <span class="role-title">Ingresar como Usuario</span>
+                            <span class="role-desc">Ciudadano - reporta y da seguimiento a problemas</span>
+                        </div>
+                        <svg class="role-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                            <path d="M5 12h14M112 517 7-7 7"/>
+                        </svg>
+                    </a>
+
+                    <!-- Opción: Administrador municipal -->
+                    <!-- PARA CONECTAR: cambia href a tu ruta real de login de admin -->
+                    <a href="../pages/login_de_admin.html" class="role-btn role-admin" aria-label="Ingresar como administrador">
+                        <div class="role-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M12 14c-5 0-8 2-8 3v1h16v-1c0-1-3-3-8-3z"/>
+                                <path d="M17 3l1.5 1.5L17 6"/>
+                                <path d="M19 1l-2 2 2 2"/>
+                            </svg>
+                        </div>
+                        <div class="role-text">
+                            <span class="role-title">Ingresar como Admin</span>
+                            <span class="role-desc">Personal autorizado - gestión municipal de reportes</span>
+                        </div>
+                        <svg class="role-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                            <path d="M5 12h14M12 517 7-7 7"/>
+                        </svg>
+                    </a>
+                </div> <!--fin .role-options -->
+                <!-- Link de regreso -->
+                <a href="../pages/paginprincipal.html" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Volver al inicio
+                </a>
+
+            </div>
+
+        </main>
+
+        <!-- Footer mínimo -->
+        <footer class="footer-min">
+            <span>&copy; InfraCR 2026</span>
+            <div class="footer-pipe"></div>
+            <a href="#">Términos de uso</a>
+            <a href="#">Privacidad</a>
+            <div class="footer-pipe"></div>
+            <a href="mailto:soporte@infracr.com">soporte@infracr.com</a>
+        </footer>
+        <!-- Chatbot FAB -->
+        <button class="chatbot-fab" aria-label="Soporte en línea" title="Soporte">🤖</button>
+
+        <script>
+    /* Menú hamburguesa */
+    const btn  = document.getElementById('hamburger-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    btn.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    });
+        </script>
+    </body>
+</html>
