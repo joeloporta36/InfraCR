@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfraCR — Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/recibo_de_reportes.css">
+</head>
+<body>
+
+  <div class="page-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo-block">
+        <h1>Infra<span>CR</span></h1>
+      </div>
+      <div class="nav-links">
+        <a href="#" class="nav-link active">
+          <i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard
+        </a>
+        <a href="/pages/map.html" class="nav-link">
+          <i class="ti ti-map-2" aria-hidden="true"></i> Mapa
+        </a>
+        <a href="/pages/report.html" class="nav-link">
+          <i class="ti ti-file-plus" aria-hidden="true"></i> Crear reporte
+        </a>
+        <a href="/pages/login.html" class="nav-link">
+          <i class="ti ti-login" aria-hidden="true"></i> Iniciar sesión
+        </a>
+      </div>
+      <p class="sidebar-footer">
+        Términos de uso · Privacidad<br>
+        © InfraCR 2026 · soporte@infracr.com
+      </p>
+    </nav>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="page-header">
+        <h2>
+          <i class="ti ti-layout-dashboard" aria-hidden="true"></i>
+          Panel de <span>Reportes</span>
+        </h2>
+        <p>Gestiona y filtra todos los reportes de infraestructura</p>
+      </div>
+
+      <!-- Tarjetas de estadísticas -->
+      <div class="stats-grid" id="stats-grid">
+        <!-- Se renderizan desde dashboard.js -->
+      </div>
+
+      <!-- Filtros -->
+      <div class="filters-row">
+        <span class="filter-label">Filtrar:</span>
+
+        <div class="filter-dropdown-wrap">
+          <button class="filter-btn active" id="btn-tipo" onclick="toggleDropdown('tipo')">
+            <i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>
+            Tipo: <span id="label-tipo">Todos</span>
+            <i class="ti ti-chevron-down" aria-hidden="true" style="font-size:12px"></i>
+          </button>
+          <div class="dropdown-menu" id="drop-tipo"></div>
+        </div>
+
+        <span class="filter-sep">|</span>
+
+        <div class="filter-dropdown-wrap">
+          <button class="filter-btn" id="btn-estado" onclick="toggleDropdown('estado')">
+            <i class="ti ti-circle-dot" aria-hidden="true"></i>
+            Estado: <span id="label-estado">Todos</span>
+            <i class="ti ti-chevron-down" aria-hidden="true" style="font-size:12px"></i>
+          </button>
+          <div class="dropdown-menu" id="drop-estado"></div>
+        </div>
+
+        <span class="filter-sep">|</span>
+
+        <div class="filter-dropdown-wrap">
+          <button class="filter-btn" id="btn-canton" onclick="toggleDropdown('canton')">
+            <i class="ti ti-map-pin" aria-hidden="true"></i>
+            Cantón: <span id="label-canton">Todos</span>
+            <i class="ti ti-chevron-down" aria-hidden="true" style="font-size:12px"></i>
+          </button>
+          <div class="dropdown-menu" id="drop-canton"></div>
+        </div>
+      </div>
+
+      <!-- Píldoras de filtros activos -->
+      <div class="active-pills" id="active-pills"></div>
+
+      <!-- Tabla -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Lugar</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Cantón</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Modal de edición -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Editar reporte</h3>
+        <button class="modal-close" onclick="closeModalDirect()">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModalDirect()">Cancelar</button>
+        <button class="btn-primary" onclick="saveEdit()">
+          <i class="ti ti-device-floppy" aria-hidden="true"></i> Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <i class="ti ti-circle-check" aria-hidden="true"></i>
+    <span id="toast-msg">Reporte actualizado</span>
+  </div>
+
+  <script src="../js/recibo_de_reportes.js"></script>
+</body>
+</html>

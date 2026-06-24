@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfraCR — Mapa de Reportes</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/pagian_del_mapa.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="logo-block">
+      <h1>Infra<span>CR</span></h1>
+    </div>
+    <div class="nav-links">
+      <a href="/pages/dashboard.html" class="nav-link">
+        <i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard
+      </a>
+      <a href="#" class="nav-link active">
+        <i class="ti ti-map-2" aria-hidden="true"></i> Mapa
+      </a>
+      <a href="../pages/pagianreportes.html" class="nav-link">
+        <i class="ti ti-file-plus" aria-hidden="true"></i> Crear reporte
+      </a>
+      <a href="../pages/selecion_de_login.html" class="nav-link">
+        <i class="ti ti-login" aria-hidden="true"></i> Iniciar sesión
+      </a>
+    </div>
+    <p class="sidebar-footer">
+      Términos de uso · Privacidad<br>
+      © InfraCR 2026 · soporte@infracr.com
+    </p>
+  </nav>
+
+  <!-- Panel izquierdo con filtros y lista -->
+  <aside class="panel">
+    <div class="panel-header">
+      <h2>Reportes</h2>
+      <span class="report-count" id="report-count">7 reportes</span>
+    </div>
+
+    <!-- Búsqueda -->
+    <div class="search-wrap">
+      <i class="ti ti-search" aria-hidden="true"></i>
+      <input type="text" id="search-input" placeholder="Buscar por lugar o cantón...">
+    </div>
+
+    <!-- Filtros de estado -->
+    <div class="status-filters" id="status-filters">
+      <button class="status-btn active" data-estado="todos">Todos</button>
+      <button class="status-btn pendiente" data-estado="Pendiente">Pendiente</button>
+      <button class="status-btn revision" data-estado="Revisión">Revisión</button>
+      <button class="status-btn resuelto" data-estado="Resuelto">Resuelto</button>
+    </div>
+
+    <!-- Lista de reportes -->
+    <div class="report-list" id="report-list"></div>
+  </aside>
+
+  <!-- Mapa -->
+  <div id="map"></div>
+
+  <!-- Popup flotante al hacer clic en un pin -->
+  <div class="map-popup" id="map-popup">
+    <button class="popup-close" id="popup-close" aria-label="Cerrar">
+      <i class="ti ti-x" aria-hidden="true"></i>
+    </button>
+    <div class="popup-content" id="popup-content"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../js/pagina_del_mapa.js"></script>
+</body>
+</html>
